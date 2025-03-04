@@ -28,6 +28,7 @@ const RegisterPage = () => {
     try {
       const data = await registerUser(formData);
       localStorage.setItem('token', data.token);
+      window.dispatchEvent(new Event('storage'));
       console.log('Данные для регистрации:', formData);
       console.log('Token:', localStorage.getItem('token'));
       navigate('..');

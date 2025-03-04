@@ -56,3 +56,52 @@
 .registerButton:active {
     background-color: #388e3c;
 }
+
+.userName {
+    margin: 0 5px;
+    font-size: 16px;
+    font-weight: 600;
+    color: #333;
+    text-decoration: none;
+    transition: color 0.3s ease;
+    display: flex;
+    align-items: center;
+}
+
+/*.userName:hover {*/
+/*    color: #4CAF50;*/
+/*}*/
+
+.userIcon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #f0f0f0;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    border: none;
+}
+
+.userIcon svg {
+    stroke: #333;
+    transition: stroke 0.3s ease;
+}
+
+.userIcon:hover {
+    background-color: #4CAF50;
+}
+
+.userIcon:hover svg {
+    stroke: #ffffff;
+}
+
+.userIcon:active {
+    background-color: #227a22;
+}
+
+.userIcon:active svg {
+    stroke: #c0c0c0;
+}

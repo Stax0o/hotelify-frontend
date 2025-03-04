@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styles from './authPage.module.css';
-import {loginUser} from "../../services/api.js";
+import { loginUser } from '../../services/api.js';
 
 const LoginPage = () => {
   const [email, setEmail] = useState('');
@@ -11,9 +11,9 @@ const LoginPage = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-
-      const data = await loginUser({email, password})
-      localStorage.setItem('token', data.token)
+      const data = await loginUser({ email, password });
+      localStorage.setItem('token', data.token);
+      window.dispatchEvent(new Event('storage'));
       console.log('Данные для входа:', { email, password });
       console.log('Token:', localStorage.getItem('token'));
       navigate('..');
