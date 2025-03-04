@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styles from './authPage.module.css';
+import {loginUser} from "../../services/api.js";
 
 const LoginPage = () => {
   const [email, setEmail] = useState('');
@@ -10,11 +11,14 @@ const LoginPage = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      // todo Добавить API запрос на авторизацию
-      console.log('Logging in with:', { email, password });
+
+      const data = await loginUser({email, password})
+      localStorage.setItem('token', data.token)
+      console.log('Данные для входа:', { email, password });
+      console.log('Token:', localStorage.getItem('token'));
       navigate('..');
     } catch (error) {
-      console.error('LoginPage failed:', error);
+      console.error('Ошибка входа:', error);
     }
   };
 

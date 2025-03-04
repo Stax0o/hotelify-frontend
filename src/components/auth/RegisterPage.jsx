@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styles from './authPage.module.css';
+import { registerUser } from '../../services/api.js';
 
 const RegisterPage = () => {
   const [formData, setFormData] = useState({
@@ -25,11 +26,13 @@ const RegisterPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      // todo Добавить API запрос на регистрацию
-      console.log('Registering with:', formData);
+      const data = await registerUser(formData);
+      localStorage.setItem('token', data.token);
+      console.log('Данные для регистрации:', formData);
+      console.log('Token:', localStorage.getItem('token'));
       navigate('..');
     } catch (error) {
-      console.error('Registration failed:', error);
+      console.error('Ошибка регистрации:', error);
     }
   };
 
