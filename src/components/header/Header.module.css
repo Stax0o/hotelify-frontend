@@ -1,0 +1,58 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 40px;
+    background-color: white;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.08);
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: 700;
+    color: #333;
+    text-decoration: none;
+}
+
+.buttons {
+    display: flex;
+    gap: 12px;
+}
+
+.button {
+    padding: 10px 22px;
+    cursor: pointer;
+    border-radius: 20px;
+    font-size: 16px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.loginButton {
+    background-color: transparent;
+    color: #333;
+    border: 2px solid #dcdcdc;
+}
+
+.loginButton:hover {
+    background-color: #f0f0f0;
+    border-color: #c0c0c0;
+}
+
+.loginButton:active {
+    background-color: #e0e0e0;
+}
+
+.registerButton {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+}
+
+.registerButton:hover {
+    background-color: #43a047;
+}
+
+.registerButton:active {
+    background-color: #388e3c;
+}
