@@ -1,0 +1,87 @@
+.profileContainer {
+    background: #fff;
+    margin: 10px;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.profileWrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+}
+
+.userInfoContainer {
+    flex: 0 0 300px;
+}
+
+.bookingsContainer {
+    flex: 1;
+    min-width: 400px;
+}
+
+.bookingItem {
+    padding: 10px;
+    margin: 10px 0;
+    background: #f9f9f9;
+    border-radius: 8px;
+}
+
+.loading, .error {
+    margin: 20px;
+    text-align: center;
+    font-size: 24px;
+}
+
+.error {
+    color: red;
+}
+
+.logoutButton {
+    margin:  8px 8px 0 8px;
+    padding: 6px 14px;
+    cursor: pointer;
+    border-radius: 12px;
+    font-size: 14px;
+    font-weight: 500;
+    background-color: #f5f5f5;
+    color: #d32f2f;
+    border: 1px solid #d32f2f;
+    transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
+}
+
+.logoutButton:hover {
+    background-color: #d32f2f;
+    color: white;
+}
+
+.logoutButton:active {
+    background-color: #b71c1c;
+    transform: scale(0.95);
+}
+
+.editProfileButton {
+    margin:  8px 8px 0 8px;
+    padding: 6px 14px;
+    cursor: pointer;
+    border-radius: 12px;
+    font-size: 14px;
+    font-weight: 500;
+    background-color: #f5f5f5;
+    color: #388e3c;
+    border: 1px solid #388e3c;
+    transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
+}
+
+.editProfileButton:hover {
+    background-color: #388e3c;
+    color: white;
+}
+
+.editProfileButton:active {
+    background-color: #2e7d32;
+    transform: scale(0.95);
+}
+
