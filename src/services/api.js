@@ -30,6 +30,10 @@ export const loginUser = async (credentials) => {
 
 export const fetchUserProfile = async () => {
   const token = localStorage.getItem('token');
+  if (!token) {
+    throw new Error('Токен не найден. Пользователь не авторизован.');
+  }
+
   const response = await fetch(`${API_URL}/api/user/me`, {
     method: 'GET',
     headers: {
@@ -47,6 +51,10 @@ export const fetchUserProfile = async () => {
 
 export const fetchUserBookings = async () => {
   const token = localStorage.getItem('token');
+  if (!token) {
+    throw new Error('Токен не найден. Пользователь не авторизован.');
+  }
+
   const response = await fetch(`${API_URL}/api/booking/my`, {
     method: 'GET',
     headers: {
