@@ -1,23 +1,24 @@
-import styles from "./profilePage.module.css";
+import styles from './profilePage.module.css';
 
-const Booking = ({booking}) => {
+const Booking = (props) => {
+  const { id, hotelId, hotelName, roomName, startDate, endDate, cost, paymentStatus } = props;
+
   return (
     <li className={styles.bookingItem}>
       <p>
-        <strong>Отель:</strong> {booking.room.hotel.name}
+        <strong>Отель:</strong> {hotelName}
       </p>
       <p>
-        <strong>Комната:</strong> {booking.room.name}
+        <strong>Комната:</strong> {roomName}
       </p>
       <p>
-        <strong>Дата:</strong> {booking.startDate} - {booking.endDate}
+        <strong>Дата:</strong> {startDate} - {endDate}
       </p>
       <p>
-        <strong>Стоимость:</strong> ${booking.cost}
+        <strong>Стоимость:</strong> ${cost}
       </p>
       <p>
-        <strong>Статус оплаты:</strong>{' '}
-        {booking.paymentStatus === 'PAID' ? 'Оплачено' : 'Ожидает оплаты'}
+        <strong>Статус оплаты:</strong> {paymentStatus === 'PAID' ? 'Оплачено' : 'Ожидает оплаты'}
       </p>
     </li>
   );

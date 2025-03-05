@@ -20,20 +20,20 @@ const BookingsList = ({ setError }) => {
   if (!bookings)
     return (
       <div className={`${styles.profileContainer} ${styles.bookingsContainer}`}>
-        <h2>Мои бронирования</h2>
+        <h2>История бронирований</h2>
         <p className={styles.loading}>Загрузка...</p>
       </div>
     );
 
   return (
     <div className={`${styles.profileContainer} ${styles.bookingsContainer}`}>
-      <h2>Мои бронирования</h2>
+      <h2>История бронирований</h2>
       {bookings.length === 0 ? (
-        <p>У вас нет бронирований.</p>
+        <p>Вы еще ничего не бронировали.</p>
       ) : (
         <ul>
           {bookings.map((booking) => (
-            <Booking booking={booking} key={booking.id} />
+            <Booking {...booking} key={booking.id} />
           ))}
         </ul>
       )}
