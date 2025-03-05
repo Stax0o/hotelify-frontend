@@ -5,6 +5,7 @@ import MainLayout from './layouts/MainLayout.jsx';
 import LoginPage from './components/auth/LoginPage.jsx';
 import RegisterPage from './components/auth/RegisterPage.jsx';
 import ProfilePage from './components/profile/ProfilePage.jsx';
+import Hotel from "./components/hotel/Hotel.jsx";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
             <Route path="login" element={<LoginPage />} />
             <Route path="register" element={<RegisterPage />} />
             <Route path="profile" element={<ProfilePage />} />
+            <Route path="hotel/:hotelId" element={<Hotel />}></Route>
           </Route>
         </Routes>
       </div>

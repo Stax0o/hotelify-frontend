@@ -49,7 +49,7 @@ const UserInfo = ({ setError }) => {
         <strong>Роль:</strong> {user.userRole === 'USER' ? 'Пользователь' : 'Владелец отеля'}
       </p>
       <p>
-        <strong>Баланс:</strong> ${user.balance}
+        <strong>Баланс:</strong> {user.balance} руб.
       </p>
       <div>
         {/*todo реализовать функцию редактирования*/}

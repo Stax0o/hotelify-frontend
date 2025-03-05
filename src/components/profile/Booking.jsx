@@ -15,10 +15,13 @@ const Booking = (props) => {
         <strong>Дата:</strong> {startDate} - {endDate}
       </p>
       <p>
-        <strong>Стоимость:</strong> ${cost}
+        <strong>Стоимость:</strong> {cost} руб.
       </p>
       <p>
-        <strong>Статус оплаты:</strong> {paymentStatus === 'PAID' ? 'Оплачено' : 'Ожидает оплаты'}
+        <strong>Статус оплаты:</strong>
+        <span className={paymentStatus === 'PAID' ? styles.paid : styles.pending}>
+          {paymentStatus === 'PAID' ? ' Оплачено' : ' Ожидает оплаты'}
+        </span>
       </p>
     </li>
   );

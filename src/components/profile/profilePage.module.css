@@ -24,7 +24,7 @@
 
 .bookingItem {
     padding: 10px;
-    margin: 10px 0;
+    margin: 10px 10px;
     background: #f9f9f9;
     border-radius: 8px;
 }
@@ -85,3 +85,10 @@
     transform: scale(0.95);
 }
 
+.paid {
+    color: green;
+}
+
+.pending {
+    color: red;
+}

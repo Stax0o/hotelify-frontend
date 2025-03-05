@@ -61,6 +61,42 @@ export const fetchHotels = async () => {
   return response.json();
 };
 
+export const fetchHotel = async (hotelId) => {
+  const response = await fetch(`${API_URL}/api/hotel/${hotelId}`, {
+    method: 'GET',
+  });
+
+  if (!response.ok) {
+    throw new Error('Ошибка загрузки отеля');
+  }
+
+  return response.json();
+};
+
+export const fetchAvailableRoomTypes = async (hotelId, startDate, endDate) => {
+  const token = localStorage.getItem('token');
+  if (!token) {
+    throw new Error('Токен не найден. Пользователь не авторизован.');
+  }
+
+  const response = await fetch(
+    `${API_URL}/api/room/available-types?hotelId=${hotelId}&startDate=${startDate}&endDate=${endDate}`,
+    {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json',
+      },
+    },
+  );
+
+  if (!response.ok) {
+    throw new Error('Ошибка загрузки списка номеров');
+  }
+
+  return response.json();
+};
+
 export const fetchUserBookings = async () => {
   const token = localStorage.getItem('token');
   if (!token) {
