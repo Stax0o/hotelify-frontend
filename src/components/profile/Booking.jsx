@@ -1,8 +1,8 @@
 import styles from "./profilePage.module.css";
 
-const Booking = () => {
+const Booking = ({booking}) => {
   return (
-    <li key={index} className={styles.bookingItem}>
+    <li className={styles.bookingItem}>
       <p>
         <strong>Отель:</strong> {booking.room.hotel.name}
       </p>

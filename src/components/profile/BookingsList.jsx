@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import { fetchUserBookings } from '../../services/api.js';
 
 const BookingsList = ({ setError }) => {
-  const [bookings, setBookings] = useState([]);
+  const [bookings, setBookings] = useState();
 
   useEffect(() => {
     (async () => {
