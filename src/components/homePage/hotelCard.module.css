@@ -1,0 +1,116 @@
+.card {
+    width: 100%;
+    max-width: 400px;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    background: white;
+    margin: 0 auto;
+}
+
+.imageSlider {
+    position: relative;
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+}
+
+.hotelImage {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255,255,255,0.7);
+    transition: background 0.3s;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.arrow:hover {
+    background: rgba(255, 255, 255, 0.5);
+}
+
+.arrowLeft {
+    left: 10px;
+}
+
+.arrowRight {
+    right: 10px;
+}
+
+.dots {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 5px;
+}
+
+.dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    border: none;
+    background: rgba(255,255,255,0.5);
+    cursor: pointer;
+    padding: 0;
+}
+
+.activeDot {
+    background: white;
+}
+
+.header {
+    padding: 15px;
+}
+
+.title {
+    margin: 0;
+    font-size: 1.2rem;
+    color: #333;
+}
+
+.city {
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.price {
+    padding: 0 15px;
+    font-size: 1.4rem;
+    color: #2c3e50;
+    font-weight: bold;
+    margin-top: auto;
+}
+
+.bookButton {
+    background: #4CAF50;
+    color: white;
+    border: none;
+    padding: 12px;
+    margin: 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background 0.3s;
+}
+
+.bookButton:hover {
+    background: #388e3c;
+}
