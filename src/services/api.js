@@ -49,6 +49,18 @@ export const fetchUserProfile = async () => {
   return response.json();
 };
 
+export const fetchHotels = async () => {
+  const response = await fetch(`${API_URL}/api/hotel/all`, {
+    method: 'GET',
+  });
+
+  if (!response.ok) {
+    throw new Error('Ошибка загрузки отелей');
+  }
+
+  return response.json();
+};
+
 export const fetchUserBookings = async () => {
   const token = localStorage.getItem('token');
   if (!token) {
