@@ -8,7 +8,7 @@ const Hotel = () => {
   const [hotel, setHotel] = useState();
   const [availableRoomType, setAvailableRoomType] = useState([]);
   const [imagePaths, setImagePaths] = useState([]);
-  const [selected, setSelected] = useState('');
+  const [selectedRoomType, setSelectedRoomType] = useState('');
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
   const [daysCount, setDaysCount] = useState(0);
@@ -76,11 +76,11 @@ const Hotel = () => {
         <h2>Бронирование</h2>
         <div>
           <label htmlFor="dropdown">Тип номера:</label>
-          <select id="dropdown" value={selected} onChange={(e) => setSelected(e.target.value)}>
+          <select id="dropdown" value={selectedRoomType} onChange={(e) => setSelectedRoomType(e.target.value)}>
             <option value="">Выберите...</option>
             {/*todo переделать опции*/}
             {availableRoomType.map((roomType) => (
-              <option value={roomType}>{roomType}</option>
+              <option key={roomType.id} value={roomType.id}>{roomType.name}</option>
             ))}
           </select>
           <div>
