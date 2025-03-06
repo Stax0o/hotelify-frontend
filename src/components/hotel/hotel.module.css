@@ -1,0 +1,104 @@
+.container {
+    display: grid;
+    /*grid-template-columns: 1fr 1fr;*/
+    gap: 40px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 20px;
+}
+
+.hotelInfo {
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.title {
+    font-size: 2.2rem;
+    color: #2d3436;
+    margin-bottom: 25px;
+    font-weight: 600;
+}
+
+.section {
+    margin: 16px 0;
+}
+
+.infoItem {
+    display: flex;
+    align-items: baseline;
+    margin-bottom: 15px;
+    font-size: 1rem;
+    color: #636e72;
+}
+
+.infoItem strong {
+    min-width: 100px;
+    margin-right: 20px;
+    color: #2d3436;
+}
+
+.bookingCard {
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
+    height: fit-content;
+}
+
+.bookingForm {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    flex-grow: 1;
+}
+
+.dateInputs {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+}
+
+.inputGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.inputGroup label {
+    font-size: 0.9rem;
+    color: #636e72;
+}
+
+.inputGroup input,
+.select {
+    padding: 12px;
+    border: 1px solid #e0e0e0;
+    border-radius: 6px;
+    font-size: 1rem;
+}
+
+.priceInfo {
+    font-size: 1.2rem;
+    color: #2d3436;
+    margin-top: auto;
+    padding-top: 20px;
+}
+
+.bookButton {
+    background: #4CAF50;
+    color: white;
+    border: none;
+    padding: 15px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1.1rem;
+    transition: background 0.3s;
+}
+
+.bookButton:hover {
+    background: #388e3c;
+}
