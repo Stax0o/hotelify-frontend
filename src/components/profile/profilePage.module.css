@@ -11,6 +11,8 @@
     justify-content: space-between;
     align-items: flex-start;
     flex-wrap: wrap;
+    max-width: 1200px;
+    margin: auto;
 }
 
 .userInfoContainer {
@@ -49,37 +51,37 @@
     transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
 }
 
-.logoutButton {
+.redButton {
     background-color: #f5f5f5;
     color: #d32f2f;
     border: 1px solid #d32f2f;
 }
 
-.logoutButton:hover {
+.redButton:hover {
     background-color: #d32f2f;
     color: white;
 }
 
-.logoutButton:active {
+.redButton:active {
     background-color: #b71c1c;
 }
 
-.editProfileButton {
+.greenButton {
     background-color: #f5f5f5;
     color: #388e3c;
     border: 1px solid #388e3c;
 }
 
-.editProfileButton:hover {
+.greenButton:hover {
     background-color: #388e3c;
     color: white;
 }
 
-.editProfileButton:active {
+.greenButton:active {
     background-color: #2e7d32;
 }
 
-.toggleButton {
+.blueButton {
     background-color: #f5f5f5;
     color: #2f4ad3;
     border: 1px solid #2f4ad3;
@@ -87,12 +89,12 @@
     min-height: 35px;
 }
 
-.toggleButton:hover {
+.blueButton:hover {
     background-color: #2f4ad3;
     color: white;
 }
 
-.toggleButton:active {
+.blueButton:active {
     background-color: #1f328f;
 }
 

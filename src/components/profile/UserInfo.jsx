@@ -58,15 +58,15 @@ const UserInfo = ({ setError, isHotels, setIsHotels }) => {
         </p>
         <div>
           {/*todo реализовать функцию редактирования*/}
-          <button className={`${styles.editProfileButton} ${styles.button}`}>Редактировать</button>
-          <button className={`${styles.logoutButton} ${styles.button}`} onClick={handleLogout}>
+          <button className={`${styles.greenButton} ${styles.button}`}>Редактировать</button>
+          <button className={`${styles.redButton} ${styles.button}`} onClick={handleLogout}>
             Выход
           </button>
         </div>
       </div>
       {user.userRole === 'OWNER' && (
         <div className={styles.buttonContainer}>
-          <button className={`${styles.button} ${styles.toggleButton}`} onClick={handleToggle}>
+          <button className={`${styles.button} ${styles.blueButton}`} onClick={handleToggle}>
             {isHotels ? 'Бронирования' : 'Отели'}
           </button>
         </div>

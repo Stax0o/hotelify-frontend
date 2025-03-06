@@ -145,7 +145,7 @@ export const createBooking = async (roomId, startDate, endDate) => {
     throw new Error('Токен не найден. Пользователь не авторизован.');
   }
 
-  const requestBody = {
+  const bookingDate = {
     roomId,
     startDate,
     endDate,
@@ -157,11 +157,48 @@ export const createBooking = async (roomId, startDate, endDate) => {
       Authorization: `Bearer ${token}`,
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify(requestBody),
+    body: JSON.stringify(bookingDate),
   });
 
   if (!response.ok) {
     throw new Error('Ошибка создания бронирования');
+  }
+
+  return response.json();
+};
+
+export const createHotel = async (name, description, city, address, phone, email, images) => {
+  const token = localStorage.getItem('token');
+  if (!token) {
+    throw new Error('Токен не найден. Пользователь не авторизован.');
+  }
+
+  const hotelData = {
+    name,
+    description,
+    city,
+    address,
+    phone,
+    email,
+  };
+
+  const formData = new FormData();
+  formData.append('hotel', JSON.stringify(hotelData));
+
+  for (let i = 0; i < images.length; i++) {
+    formData.append('images', images[i]);
+  }
+
+  const response = await fetch(`${API_URL}api/hotel`, {
+    method: 'POST',
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+    body: formData,
+  });
+
+  if (!response.ok) {
+    throw new Error('Ошибка создания отеля');
   }
 
   return response.json();
