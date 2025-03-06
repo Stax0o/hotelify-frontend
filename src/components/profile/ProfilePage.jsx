@@ -2,11 +2,13 @@ import { useEffect, useState } from 'react';
 import styles from './profilePage.module.css';
 import UserInfo from './UserInfo.jsx';
 import BookingsList from './BookingsList.jsx';
-import {useNavigate} from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
+import OwnerHotelList from './OwnerHotelList.jsx';
 
 const ProfilePage = () => {
   const [error, setError] = useState('');
-  const navigate = useNavigate()
+  const [isHotels, setIsHotels] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const token = localStorage.getItem('token');
@@ -19,8 +21,8 @@ const ProfilePage = () => {
 
   return (
     <div className={styles.profileWrapper}>
-      <UserInfo setError={setError} />
-      <BookingsList setError={setError} />
+      <UserInfo setError={setError} setIsHotels={setIsHotels} isHotels={isHotels} />
+      {!isHotels ? <BookingsList setError={setError} /> : <OwnerHotelList />}
     </div>
   );
 };

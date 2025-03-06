@@ -19,14 +19,14 @@ const BookingsList = ({ setError }) => {
 
   if (!bookings)
     return (
-      <div className={`${styles.profileContainer} ${styles.bookingsContainer}`}>
+      <div className={`${styles.profileContainer} ${styles.infoContainer}`}>
         <h2>История бронирований</h2>
         <p className={styles.loading}>Загрузка...</p>
       </div>
     );
 
   return (
-    <div className={`${styles.profileContainer} ${styles.bookingsContainer}`}>
+    <div className={`${styles.profileContainer} ${styles.infoContainer}`}>
       <h2>История бронирований</h2>
       {bookings.length === 0 ? (
         <p>Вы еще ничего не бронировали.</p>

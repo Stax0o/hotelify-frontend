@@ -118,6 +118,27 @@ export const fetchUserBookings = async () => {
   return response.json();
 };
 
+export const fetchUserHotels = async () => {
+  const token = localStorage.getItem('token');
+  if (!token) {
+    throw new Error('Токен не найден. Пользователь не авторизован.');
+  }
+
+  const response = await fetch(`${API_URL}/api/hotel/my`, {
+    method: 'GET',
+    headers: {
+      Authorization: `Bearer ${token}`,
+      'Content-Type': 'application/json',
+    },
+  });
+
+  if (!response.ok) {
+    throw new Error('Ошибка загрузки отелей');
+  }
+
+  return response.json();
+};
+
 export const createBooking = async (roomId, startDate, endDate) => {
   const token = localStorage.getItem('token');
   if (!token) {

@@ -4,7 +4,7 @@ const Booking = (props) => {
   const { id, hotelId, hotelName, roomName, startDate, endDate, cost, paymentStatus } = props;
 
   return (
-    <li className={styles.bookingItem}>
+    <li className={styles.item}>
       <p>
         <strong>Отель:</strong> {hotelName}
       </p>
