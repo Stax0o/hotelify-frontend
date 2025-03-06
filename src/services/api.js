@@ -117,3 +117,31 @@ export const fetchUserBookings = async () => {
 
   return response.json();
 };
+
+export const createBooking = async (roomId, startDate, endDate) => {
+  const token = localStorage.getItem('token');
+  if (!token) {
+    throw new Error('Токен не найден. Пользователь не авторизован.');
+  }
+
+  const requestBody = {
+    roomId,
+    startDate,
+    endDate,
+  };
+
+  const response = await fetch(`${API_URL}/api/booking`, {
+    method: 'POST',
+    headers: {
+      Authorization: `Bearer ${token}`,
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(requestBody),
+  });
+
+  if (!response.ok) {
+    throw new Error('Ошибка создания бронирования');
+  }
+
+  return response.json();
+};

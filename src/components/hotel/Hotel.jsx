@@ -1,6 +1,6 @@
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import { fetchAvailableRoomTypes, fetchHotel } from '../../services/api.js';
+import { createBooking, fetchAvailableRoomTypes, fetchHotel } from '../../services/api.js';
 import ImageSlider from '../imageSlider/ImageSlider.jsx';
 
 const Hotel = () => {
@@ -8,11 +8,12 @@ const Hotel = () => {
   const [hotel, setHotel] = useState();
   const [availableRoomType, setAvailableRoomType] = useState([]);
   const [imagePaths, setImagePaths] = useState([]);
-  const [selectedRoomType, setSelectedRoomType] = useState('');
+  const [selectedRoomType, setSelectedRoomType] = useState(0);
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
   const [daysCount, setDaysCount] = useState(0);
   const [price, setPrice] = useState(0);
+  const navigate = useNavigate();
 
   useEffect(() => {
     (async () => {
@@ -39,7 +40,7 @@ const Hotel = () => {
       const diffDays = diffTime / (1000 * 3600 * 24);
       const daysCount = diffDays >= 0 ? diffDays : 0;
       setDaysCount(daysCount);
-      const selectedRoom = availableRoomType.find((room) => room.id === parseInt(selectedRoomType));
+      const selectedRoom = availableRoomType.find((room) => room.id === selectedRoomType);
       if (selectedRoom) {
         setPrice(daysCount * selectedRoom.price);
       } else {
@@ -49,6 +50,17 @@ const Hotel = () => {
       setDaysCount(0);
     }
   }, [startDate, endDate, availableRoomType, selectedRoomType]);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const data = await createBooking(selectedRoomType, startDate, endDate);
+      console.log(data);
+      navigate('../profile');
+    } catch (error) {
+      console.error('Ошибка создания бронирования: ', error);
+    }
+  };
 
   return (
     <div>
@@ -79,7 +91,7 @@ const Hotel = () => {
       </div>
       <div>
         <h2>Бронирование</h2>
-        <div>
+        <form onSubmit={handleSubmit}>
           <div>
             <label>
               Заселение:
@@ -94,9 +106,9 @@ const Hotel = () => {
           <select
             id="dropdown"
             value={selectedRoomType}
-            onChange={(e) => setSelectedRoomType(e.target.value)}
+            onChange={(e) => setSelectedRoomType(parseInt(e.target.value))}
           >
-            <option value="">Выберите...</option>
+            <option value={0}>Выберите...</option>
             {/*todo переделать опции*/}
             {availableRoomType.map((roomType) => (
               <option key={roomType.id} value={roomType.id}>
@@ -113,8 +125,8 @@ const Hotel = () => {
             {price}
           </p>
           {/*todo Реализовать кнопку забронировать*/}
-          <button>Забронировать</button>
-        </div>
+          <button type="submit">Забронировать</button>
+        </form>
       </div>
     </div>
   );
