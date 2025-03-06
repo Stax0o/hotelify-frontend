@@ -2,7 +2,7 @@ import styles from './hotelCard.module.css';
 import ImageSlider from '../imageSlider/ImageSlider.jsx';
 import { useNavigate } from 'react-router-dom';
 
-const HotelCard = ({ id, name, city, imagePaths = [] }) => {
+const HotelCard = ({ id, name, city, imagePaths = [], minPrice }) => {
   const navigate = useNavigate();
 
   const handleClick = () => {
@@ -21,7 +21,7 @@ const HotelCard = ({ id, name, city, imagePaths = [] }) => {
       </div>
 
       {/*todo добавить минимальную стоимость*/}
-      <div className={styles.price}>от 1000 ₽</div>
+      <div className={styles.price}>от {minPrice} ₽</div>
 
       <button className={styles.bookButton} onClick={handleClick}>
         Забронировать

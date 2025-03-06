@@ -39,11 +39,16 @@ const Hotel = () => {
       const diffDays = diffTime / (1000 * 3600 * 24);
       const daysCount = diffDays >= 0 ? diffDays : 0;
       setDaysCount(daysCount);
-      setPrice(daysCount * 1000);
+      const selectedRoom = availableRoomType.find((room) => room.id === parseInt(selectedRoomType));
+      if (selectedRoom) {
+        setPrice(daysCount * selectedRoom.price);
+      } else {
+        setPrice(0);
+      }
     } else {
       setDaysCount(0);
     }
-  }, [startDate, endDate]);
+  }, [startDate, endDate, availableRoomType, selectedRoomType]);
 
   return (
     <div>
@@ -75,14 +80,6 @@ const Hotel = () => {
       <div>
         <h2>Бронирование</h2>
         <div>
-          <label htmlFor="dropdown">Тип номера:</label>
-          <select id="dropdown" value={selectedRoomType} onChange={(e) => setSelectedRoomType(e.target.value)}>
-            <option value="">Выберите...</option>
-            {/*todo переделать опции*/}
-            {availableRoomType.map((roomType) => (
-              <option key={roomType.id} value={roomType.id}>{roomType.name}</option>
-            ))}
-          </select>
           <div>
             <label>
               Заселение:
@@ -93,15 +90,29 @@ const Hotel = () => {
               <input type="date" value={endDate} onChange={(e) => setEndDate(e.target.value)} />
             </label>
           </div>
+          <label htmlFor="dropdown">Тип номера:</label>
+          <select
+            id="dropdown"
+            value={selectedRoomType}
+            onChange={(e) => setSelectedRoomType(e.target.value)}
+          >
+            <option value="">Выберите...</option>
+            {/*todo переделать опции*/}
+            {availableRoomType.map((roomType) => (
+              <option key={roomType.id} value={roomType.id}>
+                {roomType.name} - {roomType.price} руб.
+              </option>
+            ))}
+          </select>
           <p>
             <strong>Количество дней:</strong>
             {daysCount}
           </p>
-          {/*todo реализовать стоимость*/}
           <p>
             <strong>Стоимость:</strong>
             {price}
           </p>
+          {/*todo Реализовать кнопку забронировать*/}
           <button>Забронировать</button>
         </div>
       </div>
