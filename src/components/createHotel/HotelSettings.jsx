@@ -11,24 +11,33 @@ const HotelSettings = () => {
   const [hotelId, setHotelId] = useState(params.hotelId);
   const [hotel, setHotel] = useState();
   const [isLoadingHotel, setIsLoadingHotel] = useState(true);
+  const [isUpdate, setIsUpdate] = useState(false);
 
+  console.log(isUpdate);
   useEffect(() => {
     (async () => {
-      try {
-        const hotel = await fetchHotel(hotelId);
-        setHotel(hotel);
-      } catch (err) {
-        console.error('Ошибка при загрузке отеля', err);
-      } finally {
-        setIsLoadingHotel(false);
+      if (hotelId) {
+        try {
+          const hotel = await fetchHotel(hotelId);
+          setHotel(hotel);
+        } catch (err) {
+          console.error('Ошибка при загрузке отеля', err);
+        } finally {
+          setIsLoadingHotel(false);
+        }
       }
     })();
-  }, [hotelId]);
+  }, [hotelId, isUpdate]);
 
   return (
     <div>
-      {!hotelId ? (
-        <HotelCreateInfo setHotelId={setHotelId} />
+      {!hotelId || isUpdate ? (
+        <HotelCreateInfo
+          setHotelId={setHotelId}
+          isUpdate={isUpdate}
+          setIsUpdate={setIsUpdate}
+          hotelId={hotelId}
+        />
       ) : (
         <div>
           {isLoadingHotel ? (
@@ -36,7 +45,14 @@ const HotelSettings = () => {
           ) : (
             <div className={styles.container}>
               <HotelItem {...hotel} />
-              <button className={styles.button}>Редактировать</button>
+              <button
+                className={styles.button}
+                onClick={() => {
+                  setIsUpdate(true);
+                }}
+              >
+                Редактировать
+              </button>
             </div>
           )}
           <RoomsCreateInfo />

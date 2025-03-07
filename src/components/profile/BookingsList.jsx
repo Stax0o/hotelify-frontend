@@ -32,7 +32,7 @@ const BookingsList = ({ setError }) => {
         <p>Вы еще ничего не бронировали.</p>
       ) : (
         <ul>
-          {bookings.map((booking) => (
+          {bookings.slice().reverse().map((booking) => (
             <Booking {...booking} key={booking.id} />
           ))}
         </ul>

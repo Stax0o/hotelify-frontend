@@ -203,3 +203,43 @@ export const createHotel = async (name, description, city, address, phone, email
 
   return response.json();
 };
+
+export const updateHotel = async (id ,name, description, city, address, phone, email, images) => {
+  const token = localStorage.getItem('token');
+  if (!token) {
+    throw new Error('Токен не найден. Пользователь не авторизован.');
+  }
+
+  const hotelData = {
+    id,
+    name,
+    description,
+    city,
+    address,
+    phone,
+    email,
+  };
+
+  const formData = new FormData();
+  formData.append('hotel', JSON.stringify(hotelData));
+
+  if (images && images.length > 0) {
+    for (let i = 0; i < images.length; i++) {
+      formData.append('images', images[i]);
+    }
+  }
+
+  const response = await fetch(`${API_URL}/api/hotel`, {
+    method: 'PUT',
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+    body: formData,
+  });
+
+  if (!response.ok) {
+    throw new Error('Ошибка обновления данных отеля');
+  }
+
+  return response.json();
+};

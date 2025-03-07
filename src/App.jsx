@@ -7,6 +7,7 @@ import RegisterPage from './components/auth/RegisterPage.jsx';
 import ProfilePage from './components/profile/ProfilePage.jsx';
 import Hotel from './components/hotel/Hotel.jsx';
 import HotelSettings from './components/createHotel/HotelSettings.jsx';
+import HotelCreateInfo from "./components/createHotel/HotelCreateInfo.jsx";
 
 function App() {
   return (

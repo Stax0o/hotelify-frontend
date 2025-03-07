@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
-import { createHotel } from '../../services/api.js';
+import React, { useEffect, useState } from 'react';
+import { createHotel, fetchHotel, updateHotel } from '../../services/api.js';
 import styles from './hotelSettings.module.css';
 import { useNavigate } from 'react-router-dom';
 
-const HotelCreateInfo = ({ setHotelId }) => {
+const HotelCreateInfo = ({ setHotelId, isUpdate, setIsUpdate, hotelId }) => {
   const [hotelData, setHotelData] = useState({
     name: '',
     description: '',
@@ -13,6 +13,23 @@ const HotelCreateInfo = ({ setHotelId }) => {
     email: '',
   });
   const [images, setImages] = useState([]);
+
+  useEffect(() => {
+    if (isUpdate) {
+      (async () => {
+        const hotel = await fetchHotel(hotelId);
+        setHotelData({
+          name: hotel.name,
+          description: hotel.description,
+          city: hotel.city,
+          address: hotel.address,
+          phone: hotel.phone,
+          email: hotel.email,
+        });
+      })();
+    }
+  }, [hotelId, isUpdate]);
+
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const navigate = useNavigate();
@@ -27,17 +44,31 @@ const HotelCreateInfo = ({ setHotelId }) => {
     setError(null);
 
     try {
-      const answer = await createHotel(
-        hotelData.name,
-        hotelData.description,
-        hotelData.city,
-        hotelData.address,
-        hotelData.phone,
-        hotelData.email,
-        images,
-      );
-      setHotelId(answer.id);
-      navigate(`${answer.id}`, { relative: 'path' });
+      if (!isUpdate) {
+        const answer = await createHotel(
+          hotelData.name,
+          hotelData.description,
+          hotelData.city,
+          hotelData.address,
+          hotelData.phone,
+          hotelData.email,
+          images,
+        );
+        setHotelId(answer.id);
+        navigate(`${answer.id}`, { relative: 'path' });
+      } else {
+        await updateHotel(
+          hotelId,
+          hotelData.name,
+          hotelData.description,
+          hotelData.city,
+          hotelData.address,
+          hotelData.phone,
+          hotelData.email,
+          images,
+        );
+        setIsUpdate(false)
+      }
     } catch (error) {
       setError(error.message);
     } finally {
@@ -104,11 +135,11 @@ const HotelCreateInfo = ({ setHotelId }) => {
         </div>
         <div className={styles.inputGroup}>
           <label>Фото</label>
-          <input type="file" multiple onChange={handleImageChange} required />
+          <input type="file" multiple onChange={handleImageChange} required={!isUpdate} />
         </div>
         <div className={styles.buttonContainer}>
           <button type="submit" className={styles.button} disabled={loading}>
-            Создать
+            {!isUpdate ? 'Создать' : 'Сохранить'}
           </button>
         </div>
         {loading && <p className={styles.loading}>Загрузка...</p>}
