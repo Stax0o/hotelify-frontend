@@ -2,9 +2,11 @@ import { useEffect, useState } from 'react';
 import { fetchUserHotels } from '../../services/api.js';
 import styles from './profilePage.module.css';
 import HotelItem from './HotelItem.jsx';
+import { useNavigate } from 'react-router-dom';
 
 const OwnerHotelList = () => {
   const [hotels, setHotels] = useState();
+  const navigate = useNavigate();
 
   useEffect(() => {
     (async () => {
@@ -30,6 +32,7 @@ const OwnerHotelList = () => {
       <div style={{ display: 'flex', alignItems: 'center' }}>
         <h2>Список отелей</h2>
         <button
+          onClick={() => navigate('create-hotel')}
           className={`${styles.button} ${styles.greenButton}`}
           style={{ margin: '0 0 0 auto' }}
         >

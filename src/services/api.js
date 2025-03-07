@@ -189,7 +189,7 @@ export const createHotel = async (name, description, city, address, phone, email
     formData.append('images', images[i]);
   }
 
-  const response = await fetch(`${API_URL}api/hotel`, {
+  const response = await fetch(`${API_URL}/api/hotel`, {
     method: 'POST',
     headers: {
       Authorization: `Bearer ${token}`,
