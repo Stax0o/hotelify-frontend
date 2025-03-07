@@ -1,6 +1,6 @@
 import HotelCreateInfo from './HotelCreateInfo.jsx';
 import React, { useEffect, useState } from 'react';
-import RoomsCreateInfo from './RoomsCreateInfo.jsx';
+import RoomsList from './RoomsList.jsx';
 import { useParams } from 'react-router-dom';
 import HotelItem from '../profile/HotelItem.jsx';
 import { fetchHotel } from '../../services/api.js';
@@ -55,7 +55,7 @@ const HotelSettings = () => {
               </button>
             </div>
           )}
-          <RoomsCreateInfo />
+          <RoomsList hotelId={hotelId} />
         </div>
       )}
     </div>

@@ -204,7 +204,7 @@ export const createHotel = async (name, description, city, address, phone, email
   return response.json();
 };
 
-export const updateHotel = async (id ,name, description, city, address, phone, email, images) => {
+export const updateHotel = async (id, name, description, city, address, phone, email, images) => {
   const token = localStorage.getItem('token');
   if (!token) {
     throw new Error('Токен не найден. Пользователь не авторизован.');
@@ -239,6 +239,55 @@ export const updateHotel = async (id ,name, description, city, address, phone, e
 
   if (!response.ok) {
     throw new Error('Ошибка обновления данных отеля');
+  }
+
+  return response.json();
+};
+
+export const fetchRoomsByHotelId = async (hotelId) => {
+  const token = localStorage.getItem('token');
+  if (!token) {
+    throw new Error('Токен не найден. Пользователь не авторизован.');
+  }
+
+  const response = await fetch(`${API_URL}/api/room?hotelId=${hotelId}`, {
+    method: 'GET',
+    headers: {
+      Authorization: `Bearer ${token}`,
+      'Content-Type': 'application/json',
+    },
+  });
+
+  if (!response.ok) {
+    throw new Error('Ошибка загрузки номеров');
+  }
+
+  return response.json();
+};
+
+export const createRooms = async (hotelId, name, price, count) => {
+  const token = localStorage.getItem('token');
+  if (!token) {
+    throw new Error('Токен не найден. Пользователь не авторизован.');
+  }
+
+  const roomsDate = {
+    hotelId,
+    name,
+    price,
+  };
+
+  const response = await fetch(`${API_URL}/api/room?count=${count}`, {
+    method: 'POST',
+    headers: {
+      Authorization: `Bearer ${token}`,
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(roomsDate),
+  });
+
+  if (!response.ok) {
+    throw new Error('Ошибка создания номеров');
   }
 
   return response.json();
