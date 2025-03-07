@@ -1,8 +1,8 @@
-import { useEffect, useState } from 'react';
-import { fetchUserHotels } from '../../services/api.js';
+import {useEffect, useState} from 'react';
+import {fetchUserHotels} from '../../services/api.js';
 import styles from './profilePage.module.css';
 import HotelItem from './HotelItem.jsx';
-import { useNavigate } from 'react-router-dom';
+import {useNavigate} from 'react-router-dom';
 
 const OwnerHotelList = () => {
   const [hotels, setHotels] = useState();
@@ -29,12 +29,12 @@ const OwnerHotelList = () => {
 
   return (
     <div className={`${styles.profileContainer} ${styles.infoContainer}`}>
-      <div style={{ display: 'flex', alignItems: 'center' }}>
+      <div style={{display: 'flex', alignItems: 'center'}}>
         <h2>Список отелей</h2>
         <button
-          onClick={() => navigate('create-hotel')}
+          onClick={() => navigate('hotel-settings')}
           className={`${styles.button} ${styles.greenButton}`}
-          style={{ margin: '0 0 0 auto' }}
+          style={{margin: '0 0 0 auto'}}
         >
           Добавить отель
         </button>
@@ -44,7 +44,18 @@ const OwnerHotelList = () => {
       ) : (
         <ul>
           {hotels.map((hotel) => (
-            <HotelItem {...hotel} key={hotel.id} />
+            <>
+              <li className={styles.item} key={hotel.id}>
+                <HotelItem {...hotel} />
+              </li>
+              <button
+                onClick={() => {navigate(`hotel-settings/${hotel.id}`)}}
+                className={`${styles.button} ${styles.greenButton}`}
+                style={{display: 'block', margin: '0 auto 25px auto'}}
+              >
+                Редактировать
+              </button>
+            </>
           ))}
         </ul>
       )}

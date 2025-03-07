@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import styles from './createHotel.module.css';
 import { createHotel } from '../../services/api.js';
+import styles from './hotelSettings.module.css';
+import { useNavigate } from 'react-router-dom';
 
-const HotelCreateInfo = () => {
+const HotelCreateInfo = ({ setHotelId }) => {
   const [hotelData, setHotelData] = useState({
     name: '',
     description: '',
@@ -14,6 +15,7 @@ const HotelCreateInfo = () => {
   const [images, setImages] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const navigate = useNavigate();
 
   const handleImageChange = (event) => {
     setImages(event.target.files);
@@ -25,7 +27,7 @@ const HotelCreateInfo = () => {
     setError(null);
 
     try {
-      await createHotel(
+      const answer = await createHotel(
         hotelData.name,
         hotelData.description,
         hotelData.city,
@@ -34,7 +36,8 @@ const HotelCreateInfo = () => {
         hotelData.email,
         images,
       );
-      alert('Отель успешно создан!');
+      setHotelId(answer.id);
+      navigate(`${answer.id}`, { relative: 'path' });
     } catch (error) {
       setError(error.message);
     } finally {
@@ -76,7 +79,7 @@ const HotelCreateInfo = () => {
         <div className={styles.inputGroup}>
           <label>Телефон</label>
           <input
-            type='tel'
+            type="tel"
             value={hotelData.phone}
             onChange={(e) => setHotelData({ ...hotelData, phone: e.target.value })}
             required

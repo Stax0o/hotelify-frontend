@@ -6,7 +6,7 @@ import LoginPage from './components/auth/LoginPage.jsx';
 import RegisterPage from './components/auth/RegisterPage.jsx';
 import ProfilePage from './components/profile/ProfilePage.jsx';
 import Hotel from './components/hotel/Hotel.jsx';
-import CreateHotel from './components/createHotel/CreateHotel.jsx';
+import HotelSettings from './components/createHotel/HotelSettings.jsx';
 
 function App() {
   return (
@@ -19,7 +19,8 @@ function App() {
             <Route path="register" element={<RegisterPage />} />
             <Route path="profile" element={<ProfilePage />} />
             <Route path="hotel/:hotelId" element={<Hotel />} />
-            <Route path="profile/create-hotel" element={<CreateHotel />} />
+            <Route path="profile/hotel-settings" element={<HotelSettings />} />
+            <Route path="profile/hotel-settings/:hotelId" element={<HotelSettings />} />
           </Route>
         </Routes>
       </div>
