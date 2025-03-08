@@ -112,6 +112,23 @@
     background-color: #1f328f;
 }
 
+.topUpButton {
+    background-color: #fff;
+    color: #e3732c;
+    font-weight: bold;
+    border: 1px solid #fff;
+    margin: auto 0 auto auto;
+}
+
+.topUpButton:hover {
+    background-color: #e3732c;
+    color: white;
+}
+
+.topUpButton:active {
+    background-color: #b15621;
+}
+
 .buttonContainer {
     display: flex;
     justify-content: center;

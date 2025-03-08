@@ -53,9 +53,12 @@ const UserInfo = ({ setError, isHotels, setIsHotels }) => {
         <p>
           <strong>Роль:</strong> {user.userRole === 'USER' ? 'Пользователь' : 'Владелец отеля'}
         </p>
-        <p>
-          <strong>Баланс:</strong> {user.balance} руб.
-        </p>
+        <div style={{ display: 'flex' }}>
+          <p style={{ margin: 'auto 0' }}>
+            <strong>Баланс:</strong> {user.balance} руб.
+          </p>
+          <button className={`${styles.topUpButton} ${styles.button}`}>Пополнить</button>
+        </div>
         <div>
           {/*todo реализовать функцию редактирования*/}
           <button className={`${styles.greenButton} ${styles.button}`}>Редактировать</button>
