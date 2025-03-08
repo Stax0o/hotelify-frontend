@@ -1,11 +1,9 @@
 import HotelCard from './HotelCard.jsx';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { fetchHotels } from '../../services/api.js';
 import styles from './hotelList.module.css';
 
-const HotelList = () => {
-  const [hotels, setHotels] = useState([]);
-
+const HotelList = ({ setHotels, hotels }) => {
   useEffect(() => {
     (async () => {
       try {

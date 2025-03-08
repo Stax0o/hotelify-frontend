@@ -49,8 +49,13 @@ export const fetchUserProfile = async () => {
   return response.json();
 };
 
-export const fetchHotels = async () => {
-  const response = await fetch(`${API_URL}/api/hotel/all`, {
+export const fetchHotels = async (date, city, price) => {
+  const params = new URLSearchParams();
+  if (date) params.append('date', date);
+  if (city) params.append('city', city);
+  if (price && price !== 0) params.append('price', price);
+
+  const response = await fetch(`${API_URL}/api/hotel/all?${params.toString()}`, {
     method: 'GET',
   });
 
