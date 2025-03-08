@@ -5,14 +5,19 @@ import { payingForBooking } from '../../services/api.js';
 const Booking = (props) => {
   const { id, hotelName, roomName, startDate, endDate, cost, paymentStatus, forceUpdate } = props;
   const [status, setStatus] = useState(paymentStatus);
+  const [error, setError] = useState('');
 
   const handlePay = async () => {
     try {
       const response = await payingForBooking(id);
       setStatus(response.paymentStatus);
       forceUpdate();
+      setError('');
     } catch (e) {
-      console.error(e.message);
+      setError('Ошибка оплаты');
+      setTimeout(() => {
+        setError('');
+      }, 5000);
     }
   };
 
@@ -36,6 +41,7 @@ const Booking = (props) => {
           {status === 'PAID' ? ' Оплачено' : ' Ожидает оплаты'}
         </span>
       </p>
+      {error && <p className={styles.error}>{error}</p>}
       {status === 'UNPAID' && (
         <div className={styles.buttonContainer} style={{ marginTop: 0 }}>
           <button onClick={handlePay} className={`${styles.button} ${styles.buttonSubmit}`}>
