@@ -1,9 +1,11 @@
 import styles from './profilePage.module.css';
 import React, { useState } from 'react';
-import { payingForBooking } from '../../services/api.js';
+import { cancelBooking, payingForBooking } from '../../services/api.js';
+import { Link } from 'react-router-dom';
 
 const Booking = (props) => {
-  const { id, hotelName, roomName, startDate, endDate, cost, paymentStatus, forceUpdate } = props;
+  const { id, hotelId, hotelName, roomName, startDate, endDate, cost, paymentStatus, forceUpdate } =
+    props;
   const [status, setStatus] = useState(paymentStatus);
   const [error, setError] = useState('');
 
@@ -21,10 +23,26 @@ const Booking = (props) => {
     }
   };
 
+  const handleCancel = async () => {
+    try {
+      await cancelBooking(id);
+      forceUpdate();
+      setError('');
+    } catch (e) {
+      setError('Ошибка отмены бронирования');
+      setTimeout(() => {
+        setError('');
+      }, 5000);
+    }
+  };
+
   return (
     <li className={styles.item}>
       <p>
-        <strong>Отель:</strong> {hotelName}
+        <strong>Отель:</strong>{' '}
+        <Link to={`../hotel/${hotelId}`} className={styles.link}>
+          {hotelName}
+        </Link>
       </p>
       <p>
         <strong>Комната:</strong> {roomName}
@@ -46,6 +64,9 @@ const Booking = (props) => {
         <div className={styles.buttonContainer} style={{ marginTop: 0 }}>
           <button onClick={handlePay} className={`${styles.button} ${styles.buttonSubmit}`}>
             Оплатить
+          </button>
+          <button onClick={handleCancel} className={`${styles.button} ${styles.redButton}`}>
+            Отменить
           </button>
         </div>
       )}

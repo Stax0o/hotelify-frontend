@@ -3,7 +3,7 @@ import Booking from './Booking.jsx';
 import { useEffect, useState } from 'react';
 import { fetchUserBookings } from '../../services/api.js';
 
-const BookingsList = ({ setError, forceUpdate }) => {
+const BookingsList = ({ setError, forceUpdate, trigger }) => {
   const [bookings, setBookings] = useState();
 
   useEffect(() => {
@@ -15,7 +15,7 @@ const BookingsList = ({ setError, forceUpdate }) => {
         setError('Ошибка загрузки данных');
       }
     })();
-  }, []);
+  }, [trigger]);
 
   if (!bookings)
     return (

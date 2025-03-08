@@ -31,7 +31,7 @@ const ProfilePage = () => {
         trigger={trigger}
       />
       {!isHotels ? (
-        <BookingsList setError={setError} forceUpdate={forceUpdate} />
+        <BookingsList setError={setError} forceUpdate={forceUpdate} trigger={trigger} />
       ) : (
         <OwnerHotelList />
       )}

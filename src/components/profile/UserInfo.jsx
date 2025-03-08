@@ -68,13 +68,9 @@ const UserInfo = ({ setError, isHotels, setIsHotels, trigger }) => {
             Пополнить
           </button>
         </div>
-        <div>
-          {/*todo реализовать функцию редактирования*/}
-          <button className={`${styles.greenButton} ${styles.button}`}>Редактировать</button>
-          <button className={`${styles.redButton} ${styles.button}`} onClick={handleLogout}>
-            Выход
-          </button>
-        </div>
+        <button className={`${styles.redButton} ${styles.button}`} onClick={handleLogout}>
+          Выход
+        </button>
       </div>
       {user.userRole === 'OWNER' && (
         <div className={styles.buttonContainer}>

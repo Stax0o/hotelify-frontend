@@ -114,14 +114,14 @@
 
 .topUpButton {
     background-color: #fff;
-    color: #e3732c;
+    color: #FF6347;
     font-weight: bold;
     border: 1px solid #fff;
     margin: auto 0 auto auto;
 }
 
 .topUpButton:hover {
-    background-color: #e3732c;
+    background-color: #FF6347;
     color: white;
 }
 
@@ -159,4 +159,19 @@
 
 .pending {
     color: red;
+}
+
+.link {
+    text-decoration: none;
+    color: #4CAF50;
+    font-weight: bold;
+    transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
+}
+
+.link:hover {
+    color: #FF6347;
+}
+
+.link:active {
+    color: #FF4500;
 }
