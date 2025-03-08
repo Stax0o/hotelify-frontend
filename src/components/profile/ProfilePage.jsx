@@ -10,6 +10,9 @@ const ProfilePage = () => {
   const [isHotels, setIsHotels] = useState(false);
   const navigate = useNavigate();
 
+  const [trigger, setTrigger] = useState(0);
+  const forceUpdate = () => setTrigger((prev) => prev + 1);
+
   useEffect(() => {
     const token = localStorage.getItem('token');
     if (!token) {
@@ -21,8 +24,17 @@ const ProfilePage = () => {
 
   return (
     <div className={styles.profileWrapper}>
-      <UserInfo setError={setError} setIsHotels={setIsHotels} isHotels={isHotels} />
-      {!isHotels ? <BookingsList setError={setError} /> : <OwnerHotelList />}
+      <UserInfo
+        setError={setError}
+        setIsHotels={setIsHotels}
+        isHotels={isHotels}
+        trigger={trigger}
+      />
+      {!isHotels ? (
+        <BookingsList setError={setError} forceUpdate={forceUpdate} />
+      ) : (
+        <OwnerHotelList />
+      )}
     </div>
   );
 };

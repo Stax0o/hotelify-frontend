@@ -1,7 +1,20 @@
 import styles from './profilePage.module.css';
+import React, { useState } from 'react';
+import { payingForBooking } from '../../services/api.js';
 
 const Booking = (props) => {
-  const { id, hotelId, hotelName, roomName, startDate, endDate, cost, paymentStatus } = props;
+  const { id, hotelName, roomName, startDate, endDate, cost, paymentStatus, forceUpdate } = props;
+  const [status, setStatus] = useState(paymentStatus);
+
+  const handlePay = async () => {
+    try {
+      const response = await payingForBooking(id);
+      setStatus(response.paymentStatus);
+      forceUpdate();
+    } catch (e) {
+      console.error(e.message);
+    }
+  };
 
   return (
     <li className={styles.item}>
@@ -19,10 +32,17 @@ const Booking = (props) => {
       </p>
       <p>
         <strong>Статус оплаты:</strong>
-        <span className={paymentStatus === 'PAID' ? styles.paid : styles.pending}>
-          {paymentStatus === 'PAID' ? ' Оплачено' : ' Ожидает оплаты'}
+        <span className={status === 'PAID' ? styles.paid : styles.pending}>
+          {status === 'PAID' ? ' Оплачено' : ' Ожидает оплаты'}
         </span>
       </p>
+      {status === 'UNPAID' && (
+        <div className={styles.buttonContainer} style={{ marginTop: 0 }}>
+          <button onClick={handlePay} className={`${styles.button} ${styles.buttonSubmit}`}>
+            Оплатить
+          </button>
+        </div>
+      )}
     </li>
   );
 };

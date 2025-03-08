@@ -292,3 +292,51 @@ export const createRooms = async (hotelId, name, price, count) => {
 
   return response.json();
 };
+
+export const createTopUp = async (paymentMethod, amount) => {
+  const token = localStorage.getItem('token');
+  if (!token) {
+    throw new Error('Токен не найден. Пользователь не авторизован.');
+  }
+
+  const topUpData = {
+    paymentMethod,
+    amount,
+  };
+
+  const response = await fetch(`${API_URL}/api/topup`, {
+    method: 'POST',
+    headers: {
+      Authorization: `Bearer ${token}`,
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(topUpData),
+  });
+
+  if (!response.ok) {
+    throw new Error('Ошибка пополнения баланса');
+  }
+
+  return response.json();
+};
+
+export const payingForBooking = async (bookingId) => {
+  const token = localStorage.getItem('token');
+  if (!token) {
+    throw new Error('Токен не найден. Пользователь не авторизован.');
+  }
+
+  const response = await fetch(`${API_URL}/api/booking/${bookingId}`, {
+    method: 'PUT',
+    headers: {
+      Authorization: `Bearer ${token}`,
+      'Content-Type': 'application/json',
+    },
+  });
+
+  if (!response.ok) {
+    throw new Error('Ошибка пополнения баланса');
+  }
+
+  return response.json();
+};

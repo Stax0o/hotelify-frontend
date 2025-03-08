@@ -3,7 +3,7 @@ import Booking from './Booking.jsx';
 import { useEffect, useState } from 'react';
 import { fetchUserBookings } from '../../services/api.js';
 
-const BookingsList = ({ setError }) => {
+const BookingsList = ({ setError, forceUpdate }) => {
   const [bookings, setBookings] = useState();
 
   useEffect(() => {
@@ -32,9 +32,12 @@ const BookingsList = ({ setError }) => {
         <p>Вы еще ничего не бронировали.</p>
       ) : (
         <ul>
-          {bookings.slice().reverse().map((booking) => (
-            <Booking {...booking} key={booking.id} />
-          ))}
+          {bookings
+            .slice()
+            .reverse()
+            .map((booking) => (
+              <Booking {...booking} key={booking.id} forceUpdate={forceUpdate} />
+            ))}
         </ul>
       )}
     </div>

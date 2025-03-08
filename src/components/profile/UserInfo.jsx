@@ -2,9 +2,11 @@ import styles from './profilePage.module.css';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { fetchUserProfile } from '../../services/api.js';
+import PopUpForm from '../popUpForm/PopUpForm.jsx';
 
-const UserInfo = ({ setError, isHotels, setIsHotels }) => {
+const UserInfo = ({ setError, isHotels, setIsHotels, trigger }) => {
   const [user, setUser] = useState(null);
+  const [showForm, setShowForm] = useState(false);
   const navigate = useNavigate();
 
   const handleLogout = () => {
@@ -27,7 +29,7 @@ const UserInfo = ({ setError, isHotels, setIsHotels }) => {
         setError('Ошибка загрузки данных');
       }
     })();
-  }, []);
+  }, [showForm, trigger]);
 
   if (!user)
     return (
@@ -57,7 +59,14 @@ const UserInfo = ({ setError, isHotels, setIsHotels }) => {
           <p style={{ margin: 'auto 0' }}>
             <strong>Баланс:</strong> {user.balance} руб.
           </p>
-          <button className={`${styles.topUpButton} ${styles.button}`}>Пополнить</button>
+          <button
+            onClick={() => {
+              setShowForm(true);
+            }}
+            className={`${styles.topUpButton} ${styles.button}`}
+          >
+            Пополнить
+          </button>
         </div>
         <div>
           {/*todo реализовать функцию редактирования*/}
@@ -74,6 +83,7 @@ const UserInfo = ({ setError, isHotels, setIsHotels }) => {
           </button>
         </div>
       )}
+      {showForm && <PopUpForm setShowForm={setShowForm} />}
     </div>
   );
 };
