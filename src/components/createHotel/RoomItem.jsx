@@ -1,9 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import styles from './hotelSettings.module.css';
-import { createRooms, updateRoomType } from '../../services/api.js';
+import { createRooms, deleteRoomType, updateRoomType } from '../../services/api.js';
 
 const RoomItem = (props) => {
-  const { name = '', price = 0, count = 0, isCreate, setIsCreate, hotelId, forceUpdate } = props;
+  const {
+    name = '',
+    price = 0,
+    count = 0,
+    isCreate,
+    setIsCreate,
+    hotelId,
+    forceUpdate,
+    id,
+  } = props;
   const [roomData, setRoomData] = useState({
     name: name,
     price: price,
@@ -26,7 +35,7 @@ const RoomItem = (props) => {
         await createRooms(hotelId, roomData.name, roomData.price, roomData.count);
         setIsCreate(false);
       } else {
-        await updateRoomType(roomData.name, roomData.price, roomData.count);
+        await updateRoomType(id, roomData.name, roomData.price, roomData.count);
         forceUpdate();
       }
     } catch (e) {
@@ -35,11 +44,15 @@ const RoomItem = (props) => {
   };
 
   const handleRemove = async () => {
-    forceUpdate();
+    try {
+      await deleteRoomType(id);
+      forceUpdate();
+    } catch (e) {
+      console.error(e.message);
+    }
   };
 
   return (
-    // todo дописать Handler для обновления номеров
     <form onSubmit={handleSubmit} className={`${styles.form} ${styles.container}`}>
       <div className={styles.inputGroup}>
         <h2 className={styles.title} style={{ margin: 0 }}>

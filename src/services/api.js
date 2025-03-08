@@ -367,13 +367,14 @@ export const cancelBooking = async (bookingId) => {
   return response;
 };
 
-export const updateRoomType = async (name, price, count) => {
+export const updateRoomType = async (id, name, price, count) => {
   const token = localStorage.getItem('token');
   if (!token) {
     throw new Error('Токен не найден. Пользователь не авторизован.');
   }
 
   const data = {
+    id,
     name,
     price,
     count,
@@ -389,7 +390,28 @@ export const updateRoomType = async (name, price, count) => {
   });
 
   if (!response.ok) {
-    throw new Error('Ошибка при обновлении типов номеров');
+    throw new Error('Ошибка при обновлении типа номеров');
+  }
+
+  return response;
+};
+
+export const deleteRoomType = async (id) => {
+  const token = localStorage.getItem('token');
+  if (!token) {
+    throw new Error('Токен не найден. Пользователь не авторизован.');
+  }
+
+  const response = await fetch(`${API_URL}/api/room/${id}`, {
+    method: 'DELETE',
+    headers: {
+      Authorization: `Bearer ${token}`,
+      'Content-Type': 'application/json',
+    },
+  });
+
+  if (!response.ok) {
+    throw new Error('Ошибка при удалении типа номеров');
   }
 
   return response;

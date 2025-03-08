@@ -35,7 +35,12 @@ const RoomsList = ({ hotelId }) => {
           +
         </button>
       ) : (
-        <RoomItem isCreate={isCreate} setIsCreate={setIsCreate} hotelId={hotelId} />
+        <RoomItem
+          isCreate={isCreate}
+          setIsCreate={setIsCreate}
+          hotelId={hotelId}
+          forceUpdate={forceUpdate}
+        />
       )}
     </>
   );
