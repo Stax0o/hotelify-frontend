@@ -6,6 +6,8 @@ import styles from './hotelSettings.module.css';
 const RoomsList = ({ hotelId }) => {
   const [rooms, setRooms] = useState([]);
   const [isCreate, setIsCreate] = useState(false);
+  const [trigger, setTrigger] = useState(0);
+  const forceUpdate = () => setTrigger((prev) => prev + 1);
 
   useEffect(() => {
     (async () => {
@@ -16,12 +18,12 @@ const RoomsList = ({ hotelId }) => {
         console.error(e.message);
       }
     })();
-  }, [hotelId, isCreate]);
+  }, [hotelId, isCreate, trigger]);
 
   return (
     <>
       {rooms.map((room) => (
-        <RoomItem {...room} key={room.id} />
+        <RoomItem {...room} key={room.id} forceUpdate={forceUpdate} />
       ))}
       {!isCreate ? (
         <button

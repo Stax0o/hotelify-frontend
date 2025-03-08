@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import styles from './hotelSettings.module.css';
-import { createRooms } from '../../services/api.js';
+import { createRooms, updateRoomType } from '../../services/api.js';
 
 const RoomItem = (props) => {
-  const { name = '', price = 0, count = 0, isCreate, setIsCreate, hotelId } = props;
+  const { name = '', price = 0, count = 0, isCreate, setIsCreate, hotelId, forceUpdate } = props;
   const [roomData, setRoomData] = useState({
     name: name,
     price: price,
@@ -25,10 +25,17 @@ const RoomItem = (props) => {
       if (isCreate) {
         await createRooms(hotelId, roomData.name, roomData.price, roomData.count);
         setIsCreate(false);
+      } else {
+        await updateRoomType(roomData.name, roomData.price, roomData.count);
+        forceUpdate();
       }
     } catch (e) {
       console.error(e.message);
     }
+  };
+
+  const handleRemove = async () => {
+    forceUpdate();
   };
 
   return (
@@ -66,10 +73,16 @@ const RoomItem = (props) => {
           required
         />
       </div>
-      {(isModified || isCreate) && (
+      {isModified || isCreate ? (
         <div className={styles.buttonContainer}>
           <button type="submit" className={styles.button}>
             {isCreate ? 'Создать номера' : 'Сохранить изменения'}
+          </button>
+        </div>
+      ) : (
+        <div className={styles.buttonContainer}>
+          <button onClick={handleRemove} className={`${styles.button} ${styles.redButton}`}>
+            Удалить все номера
           </button>
         </div>
       )}

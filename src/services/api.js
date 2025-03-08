@@ -366,3 +366,31 @@ export const cancelBooking = async (bookingId) => {
 
   return response;
 };
+
+export const updateRoomType = async (name, price, count) => {
+  const token = localStorage.getItem('token');
+  if (!token) {
+    throw new Error('Токен не найден. Пользователь не авторизован.');
+  }
+
+  const data = {
+    name,
+    price,
+    count,
+  };
+
+  const response = await fetch(`${API_URL}/api/room`, {
+    method: 'PUT',
+    headers: {
+      Authorization: `Bearer ${token}`,
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(data),
+  });
+
+  if (!response.ok) {
+    throw new Error('Ошибка при обновлении типов номеров');
+  }
+
+  return response;
+};
