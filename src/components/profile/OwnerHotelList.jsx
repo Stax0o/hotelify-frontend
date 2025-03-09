@@ -55,7 +55,7 @@ const OwnerHotelList = () => {
                 className={`${styles.button} ${styles.greenButton}`}
                 style={{ display: 'block', margin: '0 auto 25px auto' }}
               >
-                Редактировать
+                Подробнее
               </button>
             </div>
           ))}

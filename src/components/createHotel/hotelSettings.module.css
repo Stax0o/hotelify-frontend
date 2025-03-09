@@ -118,6 +118,35 @@
     background-color: #b71c1c;
 }
 
+.toggleButton {
+    background-color: #f5f5f5;
+    color: #2f4ad3;
+    border: 1px solid #2f4ad3;
+}
+
+.toggleButton:hover {
+    background-color: #2f4ad3;
+    color: white;
+}
+
+.toggleButton:active {
+    background-color: #1f328f;
+}
+
+.infoItem {
+    display: flex;
+    align-items: baseline;
+    margin-bottom: 15px;
+    font-size: 1rem;
+    color: #636e72;
+}
+
+.infoItem strong {
+    min-width: 100px;
+    margin-right: 20px;
+    color: #2d3436;
+}
+
 .loading, .error {
     margin-top: 20px;
     text-align: center;
@@ -125,5 +154,13 @@
 }
 
 .error {
+    color: red;
+}
+
+.paid {
+    color: green;
+}
+
+.pending {
     color: red;
 }

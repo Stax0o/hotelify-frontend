@@ -5,6 +5,7 @@ import { useParams } from 'react-router-dom';
 import HotelItem from '../profile/HotelItem.jsx';
 import { fetchHotel } from '../../services/api.js';
 import styles from './hotelSettings.module.css';
+import HotelBookings from './HotelBookings.jsx';
 
 const HotelSettings = () => {
   const params = useParams();
@@ -12,6 +13,7 @@ const HotelSettings = () => {
   const [hotel, setHotel] = useState();
   const [isLoadingHotel, setIsLoadingHotel] = useState(true);
   const [isUpdate, setIsUpdate] = useState(false);
+  const [isRoomList, setIsRoomList] = useState(false);
 
   console.log(isUpdate);
   useEffect(() => {
@@ -45,17 +47,27 @@ const HotelSettings = () => {
           ) : (
             <div className={styles.container}>
               <HotelItem {...hotel} />
-              <button
-                className={styles.button}
-                onClick={() => {
-                  setIsUpdate(true);
-                }}
-              >
-                Редактировать
-              </button>
+              <div className={styles.buttonContainer} style={{ justifyContent: 'space-between' }}>
+                <button
+                  className={styles.button}
+                  onClick={() => {
+                    setIsUpdate(true);
+                  }}
+                >
+                  Редактировать
+                </button>
+                <button
+                  className={`${styles.toggleButton} ${styles.button}`}
+                  onClick={() => {
+                    setIsRoomList(!isRoomList);
+                  }}
+                >
+                  {isRoomList ? 'Номера' : 'Бронирования'}
+                </button>
+              </div>
             </div>
           )}
-          <RoomsList hotelId={hotelId} />
+          {isRoomList ? <RoomsList hotelId={hotelId} /> : <HotelBookings hotelId={hotelId} />}
         </div>
       )}
     </div>
