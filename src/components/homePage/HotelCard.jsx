@@ -11,16 +11,13 @@ const HotelCard = ({ id, name, city, imagePaths = [], minPrice }) => {
 
   return (
     <div className={styles.card}>
-      {/* Блок с изображениями */}
       <ImageSlider imagePaths={imagePaths} />
 
-      {/* Остальная часть карточки */}
       <div className={styles.header}>
         <h3 className={styles.title}>{name}</h3>
         <span className={styles.city}>{city}</span>
       </div>
 
-      {/*todo добавить минимальную стоимость*/}
       <div className={styles.price}>от {minPrice} ₽</div>
 
       <button className={styles.bookButton} onClick={handleClick}>

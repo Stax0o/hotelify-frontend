@@ -79,17 +79,11 @@ export const fetchHotel = async (hotelId) => {
 };
 
 export const fetchAvailableRoomTypes = async (hotelId, startDate, endDate) => {
-  const token = localStorage.getItem('token');
-  if (!token) {
-    throw new Error('Токен не найден. Пользователь не авторизован.');
-  }
-
   const response = await fetch(
     `${API_URL}/api/room/available-types?hotelId=${hotelId}&startDate=${startDate}&endDate=${endDate}`,
     {
       method: 'GET',
       headers: {
-        Authorization: `Bearer ${token}`,
         'Content-Type': 'application/json',
       },
     },
