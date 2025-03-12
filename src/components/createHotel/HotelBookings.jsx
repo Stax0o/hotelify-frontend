@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { fetchBookingsByHotelId } from '../../services/api.js';
 import HotelBookingItem from './HotelBookingItem.jsx';
+import styles from './hotelSettings.module.css';
 
 const HotelBookings = ({ hotelId }) => {
   const [bookings, setBookings] = useState([]);
@@ -18,9 +19,13 @@ const HotelBookings = ({ hotelId }) => {
 
   return (
     <>
-      {bookings.map((booking) => {
-        return <HotelBookingItem {...booking} key={booking.id} />;
-      })}
+      {bookings.length > 0 ? (
+        bookings.map((booking) => <HotelBookingItem {...booking} key={booking.id} />)
+      ) : (
+        <div className={`${styles.form} ${styles.container}`}>
+          В отеле нет активных бронирований...
+        </div>
+      )}
     </>
   );
 };

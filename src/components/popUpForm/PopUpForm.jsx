@@ -7,6 +7,7 @@ const PopUpForm = ({ setShowForm }) => {
     type: 'BANKCARD',
     amount: 500,
   });
+  const [error, setError] = useState('');
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -14,11 +15,12 @@ const PopUpForm = ({ setShowForm }) => {
       await createTopUp(popUpData.type, popUpData.amount);
       setShowForm(false);
     } catch (e) {
-      console.log('Ошибка пополнения', e.message);
+      setError('Ошибка пополнения');
+      setTimeout(() => {
+        setError('');
+      }, 5000);
     }
   };
-
-  console.log(popUpData);
 
   return (
     <div className={styles.container}>
@@ -50,6 +52,7 @@ const PopUpForm = ({ setShowForm }) => {
             required
           />
         </div>
+        {error && <p className="error">{error}</p>}
         <div className={styles.buttonSubmitBlock}>
           <button className={styles.buttonSubmit} type="submit">
             Пополнить

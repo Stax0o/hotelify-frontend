@@ -6,6 +6,7 @@ import { loginUser } from '../../services/api.js';
 const LoginPage = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
   const navigate = useNavigate();
 
   const handleLogin = async (e) => {
@@ -14,11 +15,12 @@ const LoginPage = () => {
       const data = await loginUser({ email, password });
       localStorage.setItem('token', data.token);
       window.dispatchEvent(new Event('storage'));
-      console.log('Данные для входа:', { email, password });
-      console.log('Token:', localStorage.getItem('token'));
       navigate('..');
     } catch (error) {
-      console.error('Ошибка входа:', error);
+      setError('Ошибка входа, проверьте корректность данных');
+      setTimeout(() => {
+        setError('');
+      }, 5000);
     }
   };
 
@@ -40,6 +42,7 @@ const LoginPage = () => {
               required
             />
           </div>
+          {error && <p className="error">{error}</p>}
           <button type="submit" className={styles.authButton}>
             Войти
           </button>

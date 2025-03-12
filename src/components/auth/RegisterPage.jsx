@@ -12,6 +12,7 @@ const RegisterPage = () => {
     phone: '',
     password: '',
   });
+  const [error, setError] = useState('');
 
   const navigate = useNavigate();
 
@@ -29,11 +30,12 @@ const RegisterPage = () => {
       const data = await registerUser(formData);
       localStorage.setItem('token', data.token);
       window.dispatchEvent(new Event('storage'));
-      console.log('Данные для регистрации:', formData);
-      console.log('Token:', localStorage.getItem('token'));
       navigate('..');
     } catch (error) {
-      console.error('Ошибка регистрации:', error);
+      setError('Ошибка регистрации');
+      setTimeout(() => {
+        setError('');
+      }, 5000);
     }
   };
 
@@ -117,6 +119,7 @@ const RegisterPage = () => {
               required
             />
           </div>
+          {error && <p className="error">{error}</p>}
           <button type="submit" className={styles.authButton}>
             Зарегистрироваться
           </button>

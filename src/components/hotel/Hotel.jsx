@@ -15,6 +15,7 @@ const Hotel = () => {
   const [daysCount, setDaysCount] = useState(0);
   const [price, setPrice] = useState(0);
   const navigate = useNavigate();
+  const [error, setError] = useState('');
 
   useEffect(() => {
     (async () => {
@@ -55,11 +56,13 @@ const Hotel = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const data = await createBooking(selectedRoomType, startDate, endDate);
-      console.log(data);
+      await createBooking(selectedRoomType, startDate, endDate);
       navigate('../profile');
     } catch (error) {
-      console.error('Ошибка создания бронирования: ', error);
+      setError('Ошибка создания бронирования');
+      setTimeout(() => {
+        setError('');
+      }, 5000);
     }
   };
 
@@ -134,6 +137,7 @@ const Hotel = () => {
             </p>
           </div>
 
+          {error && <p className="error">{error}</p>}
           <button type="submit" className={styles.bookButton}>
             Забронировать
           </button>

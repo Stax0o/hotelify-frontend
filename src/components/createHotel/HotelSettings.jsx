@@ -15,7 +15,6 @@ const HotelSettings = () => {
   const [isUpdate, setIsUpdate] = useState(false);
   const [isRoomList, setIsRoomList] = useState(false);
 
-  console.log(isUpdate);
   useEffect(() => {
     (async () => {
       if (hotelId) {
